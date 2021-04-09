@@ -82,14 +82,16 @@ function getTileType(value) {
 
 function Game(props) {
     const {gridX, gridY, mines, onGameState} = props;
-
-    const [state, setState] = useState({
-        openMap: {},
-        markedMap: {},
-        gameMap: generateGameMap(mines, gridY, gridX)
-    });
-
+    const [state, setState] = useState(newGameState());
     const {openMap, gameMap, markedMap} = state;
+
+    function newGameState(){
+        return {
+            openMap: {},
+            markedMap: {},
+            gameMap: generateGameMap(mines, gridY, gridX)
+        }
+    }
 
     function openTile(x, y, map = {}) {
         if (x < 0 || y < 0 || x > gridX || y > gridY)
